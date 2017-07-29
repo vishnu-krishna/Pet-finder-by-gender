@@ -33,7 +33,11 @@ export class FindPetsComponent {
             })
           }
         }
-      });
+        this.maleOwnerPets = this.maleOwnerPets.sort();
+        this.femaleOwnerPets =this.femaleOwnerPets.sort();
+      }
+      
+    );
     });
   }
 }
