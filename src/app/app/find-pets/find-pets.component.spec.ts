@@ -48,6 +48,53 @@ describe('FindPetsComponent', () => {
     expect(app.femaleOwnerPets.length).toBe(0);
   });
 
+
+
+  it('the pricing for nike customer to be called', async(() => {
+    let app = fixture.debugElement.componentInstance;
+    let findPetsService = fixture.debugElement.injector.get(FindPetsService);
+    fixture.detectChanges();
+    let compiled = fixture.debugElement.nativeElement;
+    const mockResponse =
+      [
+        {
+          "name": "Bob",
+          "gender": "Male",
+          "age": 23,
+          "pets": [
+            {
+              "name": "Garfield",
+              "type": "Cat"
+            },
+            {
+              "name": "Fido",
+              "type": "Dog"
+            }
+          ]
+        },
+        {
+          "name": "Jennifer",
+          "gender": "Female",
+          "age": 18,
+          "pets": [
+            {
+              "name": "Garfield",
+              "type": "Cat"
+            }
+          ]
+        },
+        {
+          "name": "Steve",
+          "gender": "Male",
+          "age": 45,
+          "pets": null
+        }
+      ];
+    let spy = spyOn(findPetsService, 'findPets').and.returnValue({ subscribe: () => {mockResponse} });;
+    app.findPets();
+    expect(spy).toHaveBeenCalled();
+  }));
+
   it('the mock the response and check if the fields are availble', async(() => {
     const app = fixture.debugElement.componentInstance;
     let findPetsService = fixture.debugElement.injector.get(FindPetsService);
